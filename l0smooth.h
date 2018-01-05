@@ -34,6 +34,7 @@ class l0smoothing{
   void set_lambda(double lambda){ lambda_ = lambda; }
 
   void operator()(const cv::Mat &src_img,cv::Mat &dst_img);
+  void compute_gray_img(const cv::Mat &src_img,cv::Mat &dst_img);
 
   Eigen::Vector2d compute_grad(int r,int c,const Eigen::MatrixXd &mat)const{
     int rows = mat.rows();

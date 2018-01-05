@@ -10,7 +10,24 @@
 
 #include "./l0smooth.h"
 
+
 void l0smoothing::operator()(const cv::Mat &src_img,cv::Mat &dst_img){
+  if( src_img.channels() == 3 ){
+    std::vector<cv::Mat> bgr_imgs;
+    std::vector<cv::Mat> smoothed_bgr_imgs;
+    cv::split(src_img,bgr_imgs);
+    for(int i=0;i<3;++i){
+      cv::Mat dst_gray_img;
+      compute_gray_img(bgr_imgs[i],dst_gray_img);
+      smoothed_bgr_imgs.push_back(dst_gray_img);
+    }
+    cv::merge(smoothed_bgr_imgs,dst_img);
+  }else{
+    compute_gray_img(src_img,dst_img);
+  }
+}
+
+void l0smoothing::compute_gray_img(const cv::Mat &src_img,cv::Mat &dst_img){
   img_rows_ = src_img.rows;
   img_cols_ = src_img.cols;
   std::cout << img_rows_ << "," << img_cols_ << std::endl;
@@ -87,8 +104,8 @@ void l0smoothing::operator()(const cv::Mat &src_img,cv::Mat &dst_img){
     cv::Mat tmp_img;
     cv::eigen2cv(s_,tmp_img);
     tmp_img.convertTo(dst_img,CV_8UC1,255);
-    cv::imshow("processing",dst_img);
-    cv::waitKey(1);
+    // cv::imshow("processing",dst_img);
+    // cv::waitKey(1);
     std::cout << "beta:" << beta_ << std::endl;
 
   }
