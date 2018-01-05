@@ -9,8 +9,8 @@
 #include "./l0smooth.h"
 
 int main(int argc, char *argv[]){
-  if(argc < 6){
-    std::cerr << argv[0] << " [source image] [lambda] [beta0] [max beta] [kappa]" << std::endl;
+  if(argc < 3){
+    std::cerr << argv[0] << " [source image] [lambda]" << std::endl;
     return 0;
   }
   cv::Mat src_img = cv::imread(argv[1],0);
@@ -18,9 +18,9 @@ int main(int argc, char *argv[]){
 
   l0smoothing smoother;
   double lambda = std::stod(argv[2]);
-  double beta0 = std::stod(argv[3]);
-  double max_beta = std::stod(argv[4]);
-  double kappa = std::stod(argv[5]);
+  double beta0 = 2.0*lambda;
+  double max_beta = 1.0e5;
+  double kappa = 2.0;
   smoother.set_lambda(lambda);
   smoother.set_beta0(beta0);
   smoother.set_max_beta(max_beta);

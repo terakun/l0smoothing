@@ -13,6 +13,7 @@
 void l0smoothing::operator()(const cv::Mat &src_img,cv::Mat &dst_img){
   img_rows_ = src_img.rows;
   img_cols_ = src_img.cols;
+  std::cout << img_rows_ << "," << img_cols_ << std::endl;
 
   horizontal_ = Eigen::MatrixXd::Zero(img_rows_,img_cols_);
   vertical_ = Eigen::MatrixXd::Zero(img_rows_,img_cols_);
@@ -35,10 +36,10 @@ void l0smoothing::operator()(const cv::Mat &src_img,cv::Mat &dst_img){
   impulse_(0,0) = 1;
 
   D_horizontal_(0,0) = -1;
-  D_horizontal_(0,1) = 1;
+  D_horizontal_(0,img_cols_-1) = 1;
 
   D_vertical_(0,0) = -1;
-  D_vertical_(1,0) = 1;
+  D_vertical_(img_rows_-1,0) = 1;
  
   fft_2dim(impulse_fft_,impulse_);
   fft_2dim(D_horizontal_fft_,D_horizontal_);
