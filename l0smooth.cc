@@ -109,7 +109,19 @@ void l0smoothing::compute_gray_img(const cv::Mat &src_img,cv::Mat &dst_img){
     std::cout << "beta:" << beta_ << std::endl;
 
   }
-
+  
+  // Eigen::MatrixXd grad_img(img_rows_,img_cols_);
+  // for(int r=0;r<img_rows_;++r){
+  //   for(int c=0;c<img_cols_;++c){
+  //     double h = horizontal_(r,c) , v = vertical_(r,c);
+  //     grad_img(r,c) = std::sqrt(h*h+v*v);
+  //   }
+  // }
+  // cv::Mat tmp_img,grad_cv_img;
+  // cv::eigen2cv(grad_img,tmp_img);
+  // tmp_img.convertTo(grad_cv_img,CV_8UC1,255);
+  // grad_cv_img = 255 - grad_cv_img;
+  // cv::imshow("grad",grad_cv_img);
 }
 
 

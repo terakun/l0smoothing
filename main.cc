@@ -34,7 +34,7 @@ int main(int argc, char *argv[]){
 
   cv::namedWindow("dst image",CV_WINDOW_AUTOSIZE);
   cv::imshow("dst image", dst_img);
-
+ 
   cv::imwrite(argv[2],dst_img);
 
   cv::waitKey(0);
